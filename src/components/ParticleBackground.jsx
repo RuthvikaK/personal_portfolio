@@ -40,7 +40,7 @@ const ParticleBackground = () => {
       }
 
       draw() {
-        ctx.fillStyle = `rgba(147, 197, 253, ${this.opacity})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -73,7 +73,7 @@ const ParticleBackground = () => {
           );
           
           if (distance < 100) {
-            ctx.strokeStyle = `rgba(147, 197, 253, ${0.1 * (1 - distance / 100)})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 * (1 - distance / 100)})`;
             ctx.lineWidth = 0.5;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);

@@ -83,16 +83,16 @@ const ChatBot = ({ isOpen, setIsOpen }) => {
     setIsLoading(true);
 
     try {
-      // Together AI API call
-      const response = await fetch('https://api.together.xyz/v1/chat/completions', {
+      // OpenAI API call
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           // Using environment variable for API key
-          'Authorization': `Bearer ${import.meta.env.VITE_TOGETHER_API_KEY || 'YOUR_API_KEY_HERE'}`,
+          'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_API_KEY || 'YOUR_API_KEY_HERE'}`,
         },
         body: JSON.stringify({
-          model: 'meta-llama/Llama-3.3-70B-Instruct-Turbo-Free',
+          model: 'gpt-4-turbo-preview',
           messages: [
             {
               role: 'system',
@@ -109,9 +109,6 @@ const ChatBot = ({ isOpen, setIsOpen }) => {
           ],
           max_tokens: 512,
           temperature: 0.7,
-          top_p: 0.7,
-          top_k: 50,
-          repetition_penalty: 1,
         }),
       });
 
@@ -133,7 +130,7 @@ const ChatBot = ({ isOpen, setIsOpen }) => {
         setMessages(prev => [...prev, fallbackResponse]);
       }
     } catch (error) {
-      console.error('Error calling Together AI:', error);
+      console.error('Error calling OpenAI:', error);
       // Fallback to a simple rule-based response
       const fallbackResponse = generateFallbackResponse(input);
       const botResponse = {
@@ -201,7 +198,7 @@ const ChatBot = ({ isOpen, setIsOpen }) => {
         </div>
         <button
           onClick={() => setIsOpen(false)}
-          className="text-black hover:bg-white/20 rounded-lg p-1 transition-colors"
+          className="text-white hover:bg-white/20 rounded-lg p-1 transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
